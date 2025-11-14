@@ -33,8 +33,18 @@ public class App {
   private static final Logger log = LoggerFactory.getLogger(App.class);
 
   public static void main(String[] args) {
-    var t1 = new Thread(new Runner1());
-    var t2 = new Thread(new Runner2());
+    Runnable r1 = () -> {
+      for (int i = 0; i < 10; i++) {
+        log.info("Runner1: {}", i);
+      }
+    };
+    Runnable r2 = () -> {
+      for (int i = 0; i < 10; i++) {
+        log.info("Runner2: {}", i);
+      }
+    };
+    var t1 = new Thread(r1);
+    var t2 = new Thread(r2);
 
     t1.start();
     t2.start();
